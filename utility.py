@@ -31,6 +31,7 @@ def plot_connectivity(ground_truth, connectivity, time_range, t0):
     plt.legend(bbox_to_anchor=(1.05, 0), loc='upper center', borderaxespad=0.)
     plt.suptitle('Mean connectivity')
     plt.draw()
+    plt.show()
 
 def plot_samples(samples):
     nsamples = len(samples)

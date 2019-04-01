@@ -42,8 +42,8 @@ Simulation settings. We generate <ntrials_train> trials to train the dynamic par
 and <ntrials_test> to learn the GP posterior.
 """
 
-ntrials_train                                       = 25
-ntrials_test                                        = 25
+ntrials_train                                       = 200
+ntrials_test                                        = 200
 simulation                                          = sim.integroDifferential_simulator()
 print('Generating simulation samples')
 (training_samples, testing_samples, ground_truth)   = simulation.simulate_network_dynamics(ntrials_train, ntrials_test, simulation_params)
