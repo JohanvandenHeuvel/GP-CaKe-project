@@ -32,9 +32,7 @@ class integroDifferential_simulator(object):
     def __get_green_matrices(self, relaxation_constants, time_meshgrid):
         green_matrices = []
         for constant in relaxation_constants:
-            green_matrices += [np.matrix(
-                np.multiply(time_meshgrid["causal_matrix"], np.exp(-constant*time_meshgrid["time_difference_matrix"])))
-                * time_meshgrid["time_step"]]
+            green_matrices += [np.matrix(np.multiply(time_meshgrid["causal_matrix"], np.exp(-constant*time_meshgrid["time_difference_matrix"])))*time_meshgrid["time_step"]]
         return green_matrices
     #
     def __get_moving_average_matrices(self, moving_average_time_constants, time_meshgrid):
@@ -115,10 +113,6 @@ class integroDifferential_simulator(object):
         
         source_relaxation = relaxation_coef * np.ones((p,))
         MA_constants = 10**15 * np.ones((p,))
-
-        print("connectivity_relaxations_constants: ", connectivity_relaxation_mat)
-        # print("source_relaxtion: ", source_relaxation)
-        
         
         self.dynamic_parameters = {"number_sources"                     : p,
                                    "connectivity_weights"               : adj_mat, # connectivity matrix of n x n
@@ -127,10 +121,7 @@ class integroDifferential_simulator(object):
                                    "relaxation_constants"               : source_relaxation}
 
         self.run_sampler(number_samples = ntrials_train+ntrials_test)
-
-        # print("causal_matrix: ", self.time_meshgrid["causal_matrix"])
-
-        t = self.time_meshgrid["time_range"] # call to time_meshgrid happends in run_sampler but assignment happens here, bad use of variable access
+        t = self.time_meshgrid["time_range"]
         trials_train = self.samples[0:ntrials_train]
         trials_test = self.samples[ntrials_train:]
         ground_truth = np.zeros((int(time_period / time_step), p, p))
